@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Operator05 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
         Person minSoo = new Person(sc.nextInt(), sc.nextInt());
         Person kiYeong = new Person(sc.nextInt(), sc.nextInt());
 
