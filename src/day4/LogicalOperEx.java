@@ -5,11 +5,12 @@ import java.util.Scanner;
 public class LogicalOperEx {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int result = sc.next().charAt(0);
-        System.out.println(result);
-        //1
-        System.out.println(Character.isLowerCase(result)?"소문자":"대문자");
-        //2
-
+        System.out.printf("숫자1 : ");
+        int num1 = sc.nextInt();
+        System.out.printf("숫자2 : ");
+        int num2 = sc.nextInt();
+        int sum = num1 + num2;
+        System.out.println("합계 : "+ sum);
+        System.out.printf("평균 : %.1f",sum/2.0);
     }
 }
