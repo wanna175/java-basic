@@ -1,4 +1,4 @@
-package day5;
+package day5_6;
 
 public class SwitchVal {
     public static void main(String[] args) {
