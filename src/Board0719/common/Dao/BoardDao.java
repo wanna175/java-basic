@@ -1,4 +1,4 @@
-package Board0719.common.dbop;
+package Board0719.common.Dao;
 
 import Board0719.common.factory.ConnectionFactory;
 import Board0719.exception.BoardException;
@@ -10,14 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DBBoard {
+public class BoardDao {
 
   private Connection connection = null;
   private ResultSet rs = null;
   private ArrayList<Board> boardList = null;
   private int nextbno;
 
-  public DBBoard() {
+  public BoardDao() {
     boardList = new ArrayList<>();
     updateBoardlist();
     if (boardList.size() != 0) {
