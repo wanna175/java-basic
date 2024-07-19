@@ -19,7 +19,11 @@ public class DBBoard {
   public DBBoard() {
     boardList = new ArrayList<>();
     updateBoardlist();
-    nextbno = boardList.get(boardList.size() - 1).getBno() + 1;
+    if (boardList.size() != 0) {
+      nextbno = boardList.get(boardList.size() - 1).getBno() + 1;
+    } else {
+      nextbno = 1;
+    }
   }
 
   public ArrayList<Board> getBoardlist() {
@@ -81,8 +85,8 @@ public class DBBoard {
   }
 
   private Board selectBoard(int bno) {
-    String query = "SELECT bno,title,content,writer,date"
-        + "FROM board " + "WHERE bno = ?";
+    String query = "SELECT bno,title,content,writer,date "
+        + "FROM board " + "WHERE bno=?";
     connection = ConnectionFactory.getInstance().open();
     Board board = new Board();
     try {

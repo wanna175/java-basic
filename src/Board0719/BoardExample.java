@@ -21,6 +21,7 @@ public class BoardExample {
   private void create() {
     Board board = new Board();
     System.out.println("새로운 게시물 입력");
+    sc.nextLine();
     System.out.print("제목 : ");
     board.setBtitie(sc.nextLine());
     System.out.println("내용 : ");
@@ -29,6 +30,23 @@ public class BoardExample {
     board.setBwriter(sc.nextLine());
 
     dbBoard.createBoard(board);
+    printlist();
+  }
+
+  private void update(int bno) {
+    Board board = new Board();
+    System.out.println("수정 내용 입력");
+    sc.nextLine();
+    System.out.print("제목 : ");
+    board.setBtitie(sc.nextLine());
+    System.out.println("내용 : ");
+    board.setBcontent(sc.nextLine());
+
+    dbBoard.updateBoard(bno, board);
+  }
+
+  private void del(int bno) {
+    dbBoard.deleteBoard(bno);
   }
 
   private void read() {
@@ -41,26 +59,38 @@ public class BoardExample {
     System.out.println("내용: " + board.getBcontent());
     System.out.println("작성자: " + board.getBwriter());
     System.out.println("##################");
+    System.out.println("보조메뉴 1.update 2.del 나머지는 초기화면");
+    int sel = sc.nextInt();
+    switch(sel) {
+      case 1 -> update(bno);
+      case 2 -> del(bno);
+    }
+    printlist();
   }
 
   private void clear() {
-
+    dbBoard.deleteAllBoard();
+    printlist();
   }
 
 
   public void mainMenu() {
-    System.out.println("메인메뉴 : 1. create 2. read 3. clear ");
-    System.out.println("다른 키를 누르면 종료됩니다.");
-    System.out.print("메뉴선택 : ");
-    int s = sc.nextInt();
-    switch(s) {
-      case 1 -> create();
-      case 2 -> read();
-      case 3 -> clear();
+    boolean _exit = true;
+    while (_exit) {
+      System.out.println("메인메뉴 : 1. create 2. read 3. clear ");
+      System.out.println("다른 키를 누르면 종료됩니다.");
+      System.out.print("메뉴선택 : ");
+      int s = sc.nextInt();
+      switch(s) {
+        case 1 -> create();
+        case 2 -> read();
+        case 3 -> clear();
+        default -> _exit = false;
+      }
     }
   }
 
-  public void list() {
+  private void printlist() {
     //데이터베이스에서 가져옴
     System.out.println("게시물 목록");
     System.out.println("====================");
@@ -71,6 +101,10 @@ public class BoardExample {
           + board.getBtitie());
     }
     System.out.println("====================");
+  }
+
+  public void list() {
+    printlist();
     mainMenu();
   }
 
