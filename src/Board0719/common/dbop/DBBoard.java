@@ -1,6 +1,7 @@
 package Board0719.common.dbop;
 
 import Board0719.common.factory.ConnectionFactory;
+import Board0719.exception.BoardException;
 import Board0719.vo.Board;
 import java.sql.Connection;
 import java.sql.Date;
@@ -30,7 +31,7 @@ public class DBBoard {
     return boardList;
   }
 
-  public Board getBoard(int bno) {
+  public Board getBoard(int bno) throws BoardException {
     return selectBoard(bno);
   }
 
@@ -84,7 +85,7 @@ public class DBBoard {
     }
   }
 
-  private Board selectBoard(int bno) {
+  private Board selectBoard(int bno) throws BoardException {
     String query = "SELECT bno,title,content,writer,date "
         + "FROM board " + "WHERE bno=?";
     connection = ConnectionFactory.getInstance().open();
@@ -100,7 +101,7 @@ public class DBBoard {
         board.setBwriter(rs.getString("writer"));
         board.setBdate(rs.getDate("date"));
       } else {
-        System.out.println("해당 게시물은 없거나 삭제되었습니다.");
+        throw new BoardException();
       }
       rs.close();
       pstmt.close();

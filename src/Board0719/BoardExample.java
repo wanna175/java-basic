@@ -1,6 +1,7 @@
 package Board0719;
 
 import Board0719.common.dbop.DBBoard;
+import Board0719.exception.BoardException;
 import Board0719.vo.Board;
 import java.util.Scanner;
 
@@ -53,18 +54,25 @@ public class BoardExample {
     System.out.println("게시물 읽기");
     System.out.print("bno : ");
     int bno = sc.nextInt();
-    Board board = dbBoard.getBoard(bno);
-    System.out.println("#################");
-    System.out.println("제목: " + board.getBtitie());
-    System.out.println("내용: " + board.getBcontent());
-    System.out.println("작성자: " + board.getBwriter());
-    System.out.println("##################");
-    System.out.println("보조메뉴 1.update 2.del 나머지는 초기화면");
-    int sel = sc.nextInt();
-    switch(sel) {
-      case 1 -> update(bno);
-      case 2 -> del(bno);
+    try {
+      Board board = dbBoard.getBoard(bno);
+      System.out.println("#################");
+      System.out.println("제목: " + board.getBtitie());
+      System.out.println("내용: " + board.getBcontent());
+      System.out.println("작성자: " + board.getBwriter());
+      System.out.println("##################");
+      System.out.println("보조메뉴 1.update 2.del 나머지는 초기화면");
+      int sel = sc.nextInt();
+      switch(sel) {
+        case 1 -> update(bno);
+        case 2 -> del(bno);
+      }
+    } catch (BoardException e) {
+      System.err.println(e.getMessage());
+      System.err.println(e.getMessage());
+      System.err.println(e.getMessage());
     }
+
     printlist();
   }
 
