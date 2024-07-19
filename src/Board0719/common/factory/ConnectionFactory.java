@@ -6,8 +6,6 @@ import java.sql.SQLException;
 
 
 public class ConnectionFactory {
-  //ConnectionFactory에 Mysql 서버로부터 Connection을 얻어오는 open()메서드를 작성
-  //싱글턴 패턴을 이용하여 만들어 주세요
 
   private static Connection connection = null;
   private static String url = "jdbc:mysql://127.0.0.1:3306/employees?serverTimezone=UTC";
